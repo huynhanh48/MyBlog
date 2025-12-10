@@ -6,7 +6,6 @@ import { getColumns, Posts } from "./column";
 import { DataTable } from "./data-table";
 import { useRouter } from "next/navigation";
 import ImageDashboard from "./image";
-import { fakePosts } from "./fake-post";
 
 export default function Page() {
   const router = useRouter();
