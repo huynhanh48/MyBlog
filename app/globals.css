@@ -173,3 +173,14 @@ body {
 .article-content img{
   @apply rounded-sm 
 }
+
+.article-content table{
+  border: 1px solid rgb(174, 174, 174);
+  margin: 1rem 0;
+}
+.article-content table tr{
+  border: 1px solid rgb(174, 174, 174);
+}
+.article-content table tr td{
+  border: 1px solid rgb(174, 174, 174);
+}
