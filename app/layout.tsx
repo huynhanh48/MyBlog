@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
+import { Suspense } from "react";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${montserrat.variable} antialiased `}
       >
-        {children}
+        <Suspense> {children}</Suspense>
       </body>
     </html>
   );
