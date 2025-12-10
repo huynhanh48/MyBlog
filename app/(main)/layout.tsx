@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Montserrat } from "next/font/google";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -19,12 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${montserrat.variable} ${montserrat.variable} antialiased `}
-      >
-        {children}
-      </body>
-    </html>
+    <main
+      className="min-h-screen
+        flex flex-col justify-between"
+    >
+      <Header />
+      {children}
+      <Footer />
+    </main>
   );
 }

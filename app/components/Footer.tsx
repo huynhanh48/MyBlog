@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className=" px-28 py-4 h-32 w-full fixed bottom-0 left-0 z-50">
-      <div className=" h-full w-full z-20 flex justify-between items-center p-2">
+    <footer className=" mt-auto px-28 max-md:px-4 max-lg:px-4 py-4 h-32 w-full    z-50">
+      <div className=" h-full w-full gap-8 grid  grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1  justify-between  items-center p-2">
         <div>
           <img src="/logo.svg" alt="" />
           <div className="flex ml-2 mt-2  items-center gap-4">
@@ -32,8 +32,8 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <span className="text-[14px] font-semibold">adress</span>
-          <p>Level 1, 12 Sample St, Sydney NSW 2000</p>
+          <span className="text-[14px] font-semibold">Adress</span>
+          <p>TP HUE, 48 HO XUAN HUONG</p>
         </div>
         <div>
           <span className="text-[14px] font-semibold">Phone number</span>
@@ -41,7 +41,7 @@ export default function Footer() {
         </div>
         <div>
           <span className="text-[14px] font-semibold">Email</span>
-          <p>anhpfa@gmail.com</p>
+          <p>anhpaf @gmail.com</p>
         </div>
       </div>
     </footer>

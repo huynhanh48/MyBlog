@@ -1,7 +1,7 @@
 const navigation = [
     {
         id:1,
-        href:"/home",
+        href:"/",
         label:"Trang Chủ"
     },
        {
