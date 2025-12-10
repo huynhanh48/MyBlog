@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import ImageItem from "@/models/image";
+import type { UploadApiResponse } from "cloudinary";
 
 // ⭐ Quan trọng: bắt buộc cho Buffer hoạt động
 export const runtime = "nodejs";
@@ -11,7 +12,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-export const uploadFile = async (file: File, folder: string) => {
+export const uploadFile = async (
+  file: File,
+  folder: string
+): Promise<UploadApiResponse> => {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
@@ -22,7 +26,7 @@ export const uploadFile = async (file: File, folder: string) => {
         if (error) {
           console.error("Cloudinary error:", error);
           reject(error);
-        } else resolve(result);
+        } else resolve(result as UploadApiResponse);
       }
     );
 
