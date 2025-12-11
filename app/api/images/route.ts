@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import ImageItem from "@/models/image";
 import type { UploadApiResponse } from "cloudinary";
+import dbConnect from "@/config/db";
 
-// ⭐ Quan trọng: bắt buộc cho Buffer hoạt động
+dbConnect();
 export const runtime = "nodejs";
 
 cloudinary.config({
@@ -62,7 +63,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const data = await ImageItem.find();
+    const data = await ImageItem.find().sort({ createdAt: -1 });
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "errorr API", error });

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { PaginationWithLinks } from "@/components/ui/pagination-with-link";
-import { Skeleton } from "@/components/ui/skeleton";
+
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -11,11 +11,10 @@ import LoadingUI from "../components/loadingUI";
 import { formatted } from "@/utilize/date";
 import SlideShow from "./slideshow";
 import TrendingCard from "../components/trendingcard";
-import { Swiper, SwiperSlide } from "swiper/react";
+
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import Quill from "quill";
+import { Pagination } from "swiper/modules";
 
 interface Article {
   _id: string;
@@ -56,7 +55,6 @@ export default function Home() {
     }
   };
   const GetArticles = async function () {
-    // await delay(10000);
     try {
       const response = await fetch(
         `/api/postitems?page=${page}&pagesize=${pagination.pagesize}`,
@@ -74,27 +72,21 @@ export default function Home() {
         console.error("Failed to fetch articles", response.status);
       }
     } finally {
-      setLoading(false);
     }
   };
   useEffect(() => {
     const fetchData = async () => {
-      await GetArticles();
-      await getTrendingArticles();
+      Promise.all([GetArticles(), getTrendingArticles()]).finally(() => {
+        setLoading(false);
+      });
     };
     fetchData();
-  }, []);
+  }, [page]);
   if (loading) {
     return <LoadingUI count={pagination.pagesize} />;
   } else
     return (
       <div className="w-full  max-md:px-4   px-28 row ">
-        {/* <div className="w-full flex-col mb-4  flex items-center gap-4">
-          <div className="text-2xl font-semibold">
-            Khám phá các bài viết mới
-          </div>
-          <p className="text-gray-700">Trend xu hướng của Trading SMC</p>
-        </div> */}
         <SlideShow />
 
         <div className="flex gap-10 ">
@@ -102,7 +94,7 @@ export default function Home() {
           <div className="grid  flex-7 grid-cols-3 max-md:grid-cols-1 max-lg:grid-cols-2 auto-rows-[400px] gap-8 ">
             {articles.length > 0 &&
               articles.map((el) => (
-                <div key={el._id} className="h-full">
+                <div key={el._id} className="h-full ">
                   <div className="h-1/2 w-full ">
                     <img
                       src={el.img}

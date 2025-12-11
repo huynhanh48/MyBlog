@@ -11,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "FDT",
-  description: "Fredom trading",
+  title: "Freedom Trading VN",
+  description: "Freedom trading",
 };
 
 export default function RootLayout({

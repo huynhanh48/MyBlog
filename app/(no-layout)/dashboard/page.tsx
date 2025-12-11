@@ -28,7 +28,6 @@ export default function Page() {
       return [];
     }
   }
-  const [idTab, setIdTab] = useState<number>(navDashboard[0].id);
   const [data, setData] = useState<Posts[]>([]);
   useEffect(() => {
     async function FetchData() {

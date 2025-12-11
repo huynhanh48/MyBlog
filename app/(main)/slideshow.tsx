@@ -27,7 +27,7 @@ export default function SlideShow() {
               src={e.image}
               alt={e.title}
               priority
-              className=" h-auto w-full"
+              className=" h-auto   w-full"
             />
           </SwiperSlide>
         ))}

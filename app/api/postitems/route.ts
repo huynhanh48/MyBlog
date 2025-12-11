@@ -31,41 +31,39 @@ export async function GET(req: NextRequest) {
   const id = params.get("id");
   const page = Number(params.get("page")) || 1;
   const pageSize = Number(params.get("pagesize")) || 8;
-  const skipValue = page == 1  ? 0: (page - 1) * pageSize ;
-
+  const skipValue = page == 1 ? 0 : (page - 1) * pageSize;
 
   if (id) {
     const post = await PostItem.findById(id);
     return NextResponse.json(post);
   }
 
-  const totalCount = await PostItem.countDocuments(); 
-  const posts = await PostItem.find().sort({date:-1})
+  const totalCount = await PostItem.countDocuments();
+  const posts = await PostItem.find()
+    .sort({ date: -1 })
     .skip(skipValue)
     .limit(pageSize);
 
   return NextResponse.json({
     data: posts,
-    total: totalCount,  
+    total: totalCount,
     page,
-    pageSize
+    pageSize,
   });
 }
 
 export async function POST(request: NextRequest) {
-
-
   try {
     const body = await request.json();
     const post = new PostItem({
       img: body.img,
       category: body.category,
       brief: body.brief,
-      author: body.author ?? null,
+      author: body.author ?? "Freedom Trading",
       content: body.content,
     });
 
-    const newPost = await post.save(); 
+    const newPost = await post.save();
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
     console.error("POST Error:", error);
